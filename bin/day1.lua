@@ -1,6 +1,7 @@
 #!/usr/bin/env nvim -l
 
-local aoc = require("aoc")
+local aoc = require "aoc"
+local aoc_string = require "aoc.string"
 
 local DIGIT_WORDS = {
   "one",
@@ -16,8 +17,7 @@ local DIGIT_WORDS = {
 
 local function calibration_value_from_word(line)
   local nums = {}
-  for i = 1, #line do
-    char = line:sub(i, i)
+  for char, i in aoc_string.chars(line) do
     if char:match("%d") then
       table.insert(nums, char)
     else
