@@ -18,7 +18,7 @@ local function play_day(num, options)
     result = "❌"
   end
 
-  print(("Part %d: %s %s\n"):format(num, tostring(answer), result))
+  print(("Part %d: %s %s\n"):format(num, tostring(answer or ""), result))
 end
 
 function M.play(options)
