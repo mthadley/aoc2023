@@ -1,5 +1,7 @@
 #!/usr/bin/env nvim -l
 
+local aoc = require("aoc")
+
 local DIGIT_WORDS = {
   "one",
   "two",
@@ -42,12 +44,26 @@ local function calibration_value_from_digit(line)
   return tonumber(nums[1] .. nums[#nums])
 end
 
-local part1_sum = 0
-local part2_sum = 0
-for line in io.lines("bin/day1.txt") do
-  part1_sum = part1_sum + calibration_value_from_digit(line)
-  part2_sum = part2_sum + calibration_value_from_word(line)
-end
+aoc.play {
+  part1 = {
+    run = function()
+      sum = 0
+      for line in io.lines("bin/day1.txt") do
+        sum = sum + calibration_value_from_digit(line)
+      end
+      return sum
+    end,
+    answer = 54968
+  },
 
-print("Part 1: " .. part1_sum)
-print("Part 2: " .. part2_sum)
+  part2 = {
+    run = function()
+      sum = 0
+      for line in io.lines("bin/day1.txt") do
+        sum = sum + calibration_value_from_word(line)
+      end
+      return sum
+    end,
+    answer = 54094
+  }
+}
