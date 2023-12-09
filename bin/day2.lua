@@ -44,9 +44,7 @@ function Game:power()
 
   for _, round in ipairs(self.rounds) do
     for color, count in pairs(round) do
-      if minimums[color] < count then
-        minimums[color] = count
-      end
+      minimums[color] = math.max(minimums[color], count)
     end
   end
 
