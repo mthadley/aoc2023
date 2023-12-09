@@ -4,7 +4,7 @@ local aoc = require "aoc"
 
 local Game = {}
 
-function Game:parse(line)
+function Game.parse(line)
   match, id = line:match("(Game (%d+): )")
 
   local rounds = {}
@@ -43,12 +43,30 @@ function Game:is_possible()
   return true
 end
 
+function Game:power()
+  local minimums = {
+    ["red"] = 0,
+    ["green"] = 0,
+    ["blue"] = 0,
+  }
+
+  for _, round in ipairs(self.rounds) do
+    for color, count in pairs(round) do
+      if minimums[color] < count then
+        minimums[color] = count
+      end
+    end
+  end
+
+  return minimums.red * minimums.green * minimums.blue
+end
+
 aoc.play {
   part1 = {
     run = function()
       local possible_sum = 0
       for line in io.lines("bin/day2.txt") do
-        local game = Game:parse(line)
+        local game = Game.parse(line)
         if game:is_possible() then
           possible_sum = possible_sum + game.id
         end
@@ -56,5 +74,16 @@ aoc.play {
       return possible_sum
     end,
     answer = 2268
+  },
+
+  part2 = {
+    run = function()
+      local possible_sum = 0
+      for line in io.lines("bin/day2.txt") do
+        possible_sum = possible_sum + Game.parse(line):power()
+      end
+      return possible_sum
+    end,
+    answer = 63542
   },
 }
