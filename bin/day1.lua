@@ -45,25 +45,19 @@ local function calibration_value_from_digit(line)
 end
 
 aoc.play {
-  part1 = {
-    run = function()
-      sum = 0
-      for line in io.lines("bin/day1.txt") do
-        sum = sum + calibration_value_from_digit(line)
-      end
-      return sum
-    end,
-    answer = 54968
-  },
+  part1 = function()
+    sum = 0
+    for line in io.lines("bin/day1.txt") do
+      sum = sum + calibration_value_from_digit(line)
+    end
+    return sum, 54968
+  end,
 
-  part2 = {
-    run = function()
-      sum = 0
-      for line in io.lines("bin/day1.txt") do
-        sum = sum + calibration_value_from_word(line)
-      end
-      return sum
-    end,
-    answer = 54094
-  }
+  part2 = function()
+    sum = 0
+    for line in io.lines("bin/day1.txt") do
+      sum = sum + calibration_value_from_word(line)
+    end
+    return sum, 54094
+  end,
 }

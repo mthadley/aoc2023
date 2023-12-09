@@ -1,18 +1,13 @@
 local M = {}
 
-local default_options = {
-  run = function() end,
-  answer = nil
-}
-
-local function play_day(num, options)
-  options = options or default_options
-  local answer = options.run()
+local function play_day(num, fn)
+  fn = fn or function() end
+  local answer, expected = fn()
 
   local result = ""
-  if answer == nil then
+  if expected == nil then
     result = "❔"
-  elseif answer == options.answer then
+  elseif expected == answer then
     result = "✅"
   else
     result = "❌"

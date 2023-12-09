@@ -52,28 +52,22 @@ function Game:power()
 end
 
 aoc.play {
-  part1 = {
-    run = function()
-      local possible_sum = 0
-      for line in io.lines("bin/day2.txt") do
-        local game = Game.parse(line)
-        if game:is_possible() then
-          possible_sum = possible_sum + game.id
-        end
+  part1 = function()
+    local possible_sum = 0
+    for line in io.lines("bin/day2.txt") do
+      local game = Game.parse(line)
+      if game:is_possible() then
+        possible_sum = possible_sum + game.id
       end
-      return possible_sum
-    end,
-    answer = 2268
-  },
+    end
+    return possible_sum, 2268
+  end,
 
-  part2 = {
-    run = function()
-      local possible_sum = 0
-      for line in io.lines("bin/day2.txt") do
-        possible_sum = possible_sum + Game.parse(line):power()
-      end
-      return possible_sum
-    end,
-    answer = 63542
-  },
+  part2 = function()
+    local possible_sum = 0
+    for line in io.lines("bin/day2.txt") do
+      possible_sum = possible_sum + Game.parse(line):power()
+    end
+    return possible_sum, 63542
+  end,
 }
