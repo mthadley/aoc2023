@@ -26,11 +26,7 @@ function Game.parse(line)
   )
 end
 
-local COLOR_QUOTAS = {
-  ["red"] = 12,
-  ["green"] = 13,
-  ["blue"] = 14,
-}
+local COLOR_QUOTAS = { red = 12, green = 13, blue = 14 }
 
 function Game:is_possible()
   for _, round in ipairs(self.rounds) do
@@ -44,11 +40,7 @@ function Game:is_possible()
 end
 
 function Game:power()
-  local minimums = {
-    ["red"] = 0,
-    ["green"] = 0,
-    ["blue"] = 0,
-  }
+  local minimums = { red = 0, green = 0, blue = 0 }
 
   for _, round in ipairs(self.rounds) do
     for color, count in pairs(round) do
