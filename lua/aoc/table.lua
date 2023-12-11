@@ -1,5 +1,20 @@
 local M = {}
 
+function M.fill(amount, value_or_fn)
+  local tbl = {}
+  for i = 1, amount do
+    local value
+    if type(value) == "function" then
+      value = value_or_fn(i)
+    else
+      value = value_or_fn
+    end
+
+    tbl[i] = value
+  end
+  return tbl
+end
+
 function M.count(tbl, fn)
   fn = fn or function() return true end
   local count = 0

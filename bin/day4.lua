@@ -23,14 +23,22 @@ function Card.parse(line)
   )
 end
 
+function Card:num_matching()
+  return self.winning_nums:intersection(self.nums):size()
+end
+
 function Card:points()
-  local count = self.winning_nums:intersection(self.nums):size()
+  local count = self:num_matching()
   if count == 0 then return 0 end
   return 2 ^ (count - 1)
 end
 
-function Card:is_winning_num(num)
-  return self.winning_nums()
+function Card:count(cards, i)
+  local count = 1
+  for j = i + 1, i + self:num_matching() do
+    count = count + cards[j]:count(cards, i)
+  end
+  return count
 end
 
 aoc.play {
@@ -44,5 +52,21 @@ aoc.play {
       cards,
       function(card) return card:points() end
     ), 21213
+  end,
+
+  part2 = function()
+    local cards = {}
+    for line in io.lines("bin/day4.txt") do
+      table.insert(cards, Card.parse(line))
+    end
+
+    local card_counts = aoc_table.fill(#cards, 1)
+    for i, card in ipairs(cards) do
+      for j = i + 1, i + card:num_matching() do
+        card_counts[j] = card_counts[j] + card_counts[i]
+      end
+    end
+
+    return aoc_table.sum(card_counts), 8549735
   end
 }
