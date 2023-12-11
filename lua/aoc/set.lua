@@ -20,8 +20,7 @@ function Set:add(item)
 end
 
 function Set:has(item)
-  if self.data[item] then return true end
-  return false
+  return self.data[item] or false
 end
 
 function Set:values()
