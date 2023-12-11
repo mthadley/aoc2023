@@ -33,14 +33,6 @@ function Card:points()
   return 2 ^ (count - 1)
 end
 
-function Card:count(cards, i)
-  local count = 1
-  for j = i + 1, i + self:num_matching() do
-    count = count + cards[j]:count(cards, i)
-  end
-  return count
-end
-
 aoc.play {
   part1 = function()
     local cards = {}
